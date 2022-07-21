@@ -1,1 +1,1 @@
-# XDC-Hackathon
+# Event-On-Chain
