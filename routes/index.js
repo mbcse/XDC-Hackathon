@@ -3,6 +3,7 @@ import userRoute from './user'
 import adminRoute from './admin'
 import healthRoute from './health'
 // import verifyAPIKey from '../middleware/verifyAPIKey.js'
+import verifyLoggedIn from '../middleware/verifyLoggedIn.js'
 // import { homepage } from '../controllers/home'
 
 const router = express.Router()
@@ -20,8 +21,20 @@ router.get('/', (req, res) => {
 })
 
 // user dashboard
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', verifyLoggedIn, (req, res) => {
   res.render('dashboard/index')
+})
+
+router.get('/addevent', (req, res) => {
+  res.render('dashboard/add-event')
+})
+
+router.get('/profile', (req, res) => {
+  res.render('dashboard/profile')
+})
+
+router.get('/eventlist', (req, res) => {
+  res.render('dashboard/event-list')
 })
 
 export default router

@@ -1,22 +1,21 @@
 
-const element = document.getElementById("loginWithEmail");
-element.addEventListener("click", loginWithEmail);
+const element = document.getElementById('loginWithEmail')
+element.addEventListener('click', loginWithEmail)
 
-
-function loginWithEmail(){ 
-    url = "/auth/otp"
-    var emailUser   =   document.getElementById("emailAddress").value;
-    const data = {"email":emailUser}
+function loginWithEmail () {
+  url = '/auth/otp'
+  const emailUser = document.getElementById('emailAddress').value
+  const data = { email: emailUser }
   //  var raw = "{\n    \"email\":\"mbcse50@gmail.com\"\n}";
 
-        var requestOptions = {
-        method: 'GET',
-        body: data,
-        redirect: 'follow'
-        };
+  const requestOptions = {
+    method: 'GET',
+    body: data,
+    redirect: 'follow'
+  }
 
-        fetch("/auth/otp", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+  fetch('/auth/otp', requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error))
 }

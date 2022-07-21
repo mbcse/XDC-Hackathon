@@ -30,15 +30,19 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(rateLimiter)
+const MemoryStore = session.MemoryStore
+
 app.use(session({
+  name: 'eventonchain.sid',
   secret: config.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  store: new MemoryStore(),
+  cookie: { secure: false }
 }))
 app.use(compression())
 app.use(cookieParser())
-/*app.use(cors())
+/* app.use(cors())
 app.use(helmet({
   contentSecurityPolicy: {
     useDefaults: true,
@@ -46,7 +50,7 @@ app.use(helmet({
       'img-src': ["'self'", '', 'https: data:']
     }
   }
-}))*/
+})) */
 
 app.use(express.static(path.join(__dirname, '/public')))
 app.use('/', routes)

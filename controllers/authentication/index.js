@@ -27,7 +27,7 @@ export const signingData = async (req, res) => {
     const signingData = await getSigningData('EventOnChain Login')
     user.nounce = signingData.nonce
     await user.save()
-    responseUtils.response.successResponse(res, 'Signing Data', { data: signingData.data })
+    responseUtils.response.successResponse(res, 'Signing Data', { signingData: signingData.data })
   } catch (err) {
     logger.error(err)
     responseUtils.response.serverErrorResponse(res, err)
