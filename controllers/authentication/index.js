@@ -43,7 +43,7 @@ export const signatureVerifyAndLogin = async (req, res) => {
     const user = await User.findOne({ email })
     const result = await verifySignature('EventOnChain Login', user.nounce, signature, signer)
     if (!result) {
-      return responseUtils.response.authorizationErrorResponse(res, 'Invalid Signature')
+      return responseUtils.response.authorizationErrorResponse(res, 'Invalid Signature', { result })
     }
 
     if (!user.accountsConnected.includes(signer)) {
@@ -56,7 +56,7 @@ export const signatureVerifyAndLogin = async (req, res) => {
     req.session.address = signer
 
     console.log(req.session)
-    responseUtils.response.successResponse(res, 'Logged In')
+    responseUtils.response.successResponse(res, 'Logged In', { result })
   } catch (err) {
     logger.error(err)
     responseUtils.response.serverErrorResponse(res, err)

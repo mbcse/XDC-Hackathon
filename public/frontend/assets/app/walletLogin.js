@@ -121,13 +121,12 @@ async function getAndVerifySignature (email) {
   const verifySignatureResponse = await fetch('/user/auth/cryptologin', requestOptions)
   resData = await verifySignatureResponse.json()
   console.log(resData)
-//   if (resData.data.result) {
-//     document.getElementById('displaytext').innerText = 'Wallet Connected: ' + accountConnected
-//     document.getElementById('displaytext').style.display = 'block'
-//   } else {
-//     document.getElementById('displaytext').innerText = 'Error: ' + resData.message
-//     document.getElementById('displaytext').style.display = 'block'
-//   }
+  if (resData.data.result) {
+    window.location.href = '/dashboard'
+  } else {
+    // eslint-disable-next-line no-undef
+    showErrorToast('Invalid Signature')
+  }
 }
 
 document.getElementById('connect-wallet-button').addEventListener('click', async (e) => {
