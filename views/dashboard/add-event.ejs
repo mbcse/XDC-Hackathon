@@ -45,30 +45,55 @@
                     <div class="col-lg-7">
                        
 
-                    <form class="user">
+                    <form id="add-event-form" class="user" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <div class="col-sm-12 mb-3 ">
-                                <input type="text" class="form-control form-control-user" id="" placeholder="Event Title">
+                                <input type="text" class="form-control form-control-user" id="eventName" name="eventName" placeholder="Event Name" required>
                             </div>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control form-control-user" id="" placeholder="Event Description ">
+                                <input type="text" class="form-control form-control-user" id="eventDescription" name="eventDescription" placeholder="Event Description" required>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <input type="email" class="form-control form-control-user" id="" placeholder="Cost">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="eventPassImage" name="eventPassImage"
+                                    aria-describedby="inputGroupFileAddon01" required>
+                                  <label class="custom-file-label" for="eventPassImage">Event Pass Image</label>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="eventOrganizer" name="eventOrganizer" placeholder="Event Organizer" required>
+                        </div>
+
+        
                         <div class="form-group row">
                             <div class="col-sm-12 mb-3">
-                                <input type="password" class="form-control form-control-user" id="" placeholder="Ticket Price">
+                                <input type="number" class="form-control form-control-user" id="eventTicketPrice" name="eventTicketPrice" placeholder="Event Ticket Price" required>
                             </div>
                             <div class="col-sm-12">
-                                <input type="date" class="form-control form-control-user" id="" placeholder="Date">
+                                <input type="number" class="form-control form-control-user" id="eventTicketBurnValue" name="eventTicketBurnValue" placeholder="Event Ticket Burn Value" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3">
+                                <input type="date" class="form-control form-control-user" id="eventStartDate" name="eventStartDate" placeholder="Event Start Date" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="date" class="form-control form-control-user" id="eventEndDate" name="eventEndDate" placeholder="Event End Date" required>
                             </div>
                         </div>
                         
-                        <a href="login.html" class="btn btn-primary btn-user">
+                        <button type="button" id="add-event-button" class="btn btn-primary btn-user">
                            Submit
-                        </a>
+                        </button>
                    
                     </form>
 
@@ -88,11 +113,13 @@
     <%- include('../includes/dashboard/jsFiles')%>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="/dashboard/js/demo/chart-area-demo.js"></script>
+    <script src="/dashboard/js/demo/chart-pie-demo.js"></script>
+
+    <script src="/dashboard/app/add-event.js"></script>
+
 
 </body>
 

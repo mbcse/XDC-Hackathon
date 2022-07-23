@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 // login form
 function userLogin (e) {
@@ -55,9 +56,9 @@ function loginOtp () {
       // hide sign up
       const response = JSON.parse(result)
       console.log(typeof (response))
-      if (response.status == 'success') {
+      if (response.status === 'success') {
         console.log(response.status)
-        window.location.href = '/dashboard'
+        window.location.href = '/user/dashboard'
       } else {
         alert('OTP not valid')
       }

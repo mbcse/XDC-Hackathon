@@ -1,9 +1,34 @@
 import express from 'express'
+import verifyLoggedIn from '../../middleware/verifyLoggedIn.js'
+import { dashboard } from '../../controllers/user/dashboard.js'
 
 const router = express.Router()
 
-router.get('/', (req, res) => { 
-  res.render('frontend/index')
+// user dashboard
+router.get('/', verifyLoggedIn, dashboard)
+
+router.get('/addevent', verifyLoggedIn, (req, res) => {
+  res.render('dashboard/add-event')
+})
+
+router.get('/profile', verifyLoggedIn, (req, res) => {
+  res.render('dashboard/profile')
+})
+
+router.get('/myevents', verifyLoggedIn, (req, res) => {
+  res.render('dashboard/my-event')
+})
+
+router.get('/mytickets', verifyLoggedIn, (req, res) => {
+  res.render('dashboard/my-tickets')
+})
+
+router.get('/mintlist', verifyLoggedIn, (req, res) => {
+  res.render('dashboard/mintlist')
+})
+
+router.get('/burnedtickets', verifyLoggedIn, (req, res) => {
+  res.render('dashboard/burned-tickets')
 })
 
 export default router

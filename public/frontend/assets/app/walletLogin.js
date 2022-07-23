@@ -122,7 +122,7 @@ async function getAndVerifySignature (email) {
   resData = await verifySignatureResponse.json()
   console.log(resData)
   if (resData.data.result) {
-    window.location.href = '/dashboard'
+    window.location.href = '/user/dashboard'
   } else {
     // eslint-disable-next-line no-undef
     showErrorToast('Invalid Signature')

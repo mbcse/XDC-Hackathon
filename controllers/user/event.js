@@ -37,6 +37,7 @@ export const createEvent = async (req, res) => {
     eventName, eventOrganizer, eventTicketPrice,
     eventTicketBurnValue, eventStartDate, eventEndDate
   } = req.body
+  logger.debug(req.body)
   const ipfsFileLink = await ipfsImageUploader('eventpass' + eventName, req.file.path)
   console.log(ipfsFileLink)
   try {

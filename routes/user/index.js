@@ -8,9 +8,4 @@ router.use('/auth', auth)
 router.use('/event', event)
 router.use('/dashboard', dashboard)
 
-// register page
-router.get('/register', (req, res) => {
-  res.render('register')
-})
-
 export default router
