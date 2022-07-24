@@ -8,6 +8,7 @@ import { sendEmail } from '../../services/email.js'
 import { ipfsImageUploader } from '../../services/ipfsUploader'
 import { saveJSONToIPFS } from '../../utilities/ipfsPinataUtils'
 import { mintTicket } from '../../services/blockchain/mint.js'
+import publishToQueue from '../../utilities/queueUtils'
 
 export const ticketMinter = async (req, res) => {
   const eventId = req.body.eventId
@@ -43,7 +44,8 @@ export const ticketMinter = async (req, res) => {
     }
 
     const metadataUri = await saveJSONToIPFS(metadata)
+    await publishToQueue(config.QUEUE.LIST.mint, { collectableId, creatorAddress, txId })
   } catch (err) {
-
+    responseUtils.response.serverErrorResponse(res, err)
   }
 }

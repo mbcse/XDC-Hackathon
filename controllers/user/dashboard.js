@@ -38,11 +38,26 @@ import { ipfsImageUploader } from '../../services/ipfsUploader'
 export const dashboard = async (req, res) => {
   try {
     const user = await User.findById(req.session.userId)
+    const events = await Event.find()
     res.render('dashboard/index', {
       totalEvents: user.events.length,
       totalTickets: user.ticketsBrought.length,
       totalBurnedTickets: user.ticketsBurned.length,
-      totalAccountsConnected: user.accountsConnected.length
+      totalAccountsConnected: user.accountsConnected.length,
+      events
+    })
+  } catch (err) {
+    logger.error(err)
+    responseUtils.response.serverErrorResponse(res, err)
+  }
+}
+
+export const myEvents = async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userId).populate('events').exec()
+    console.log(user.events)
+    res.render('dashboard/my-event', {
+      events: user.events
     })
   } catch (err) {
     logger.error(err)

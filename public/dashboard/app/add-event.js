@@ -14,8 +14,18 @@ async function addEvent (e) {
   }
   //   const response = await fetch('/user/event', requestOptions)
   //   const responseData = response.json()
-  const response = await axios.post('/user/event', formData, requestOptions)
-  console.log(response)
+  await axios.post('/user/event', formData, requestOptions)
+    .then((res) => {
+      console.log(res)
+      showSuccessToast(res.data.message)
+      form.reset()
+    })
+    .catch((err) => {
+      if (err.response) {
+        console.log(err.response)
+        showErrorToast(err.response.data.message)
+      }
+    })
 }
 
 $('#add-event-button').click(addEvent)

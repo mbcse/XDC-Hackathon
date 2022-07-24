@@ -9,6 +9,15 @@ const eventSchema = new Schema({
     ref: 'users',
     required: true
   },
+  stock: {
+    type: Number,
+    required: true
+  },
+  minted: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   eventName: {
     type: String,
     trim: true,

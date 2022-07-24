@@ -40,37 +40,41 @@
                         <hr>
                     </div>
 
-
                     <div class="row">
-                        <div class="col-lg-4">
-                            <div class="container">
-                                <div class="card px-4 pt-4 pb-4 mx-auto mt-5">
-                                    <div class="row">
-                                        <h5 class="align-self-center ml-2">Apple Worldwide Developer conference 2020</h5>
+                        <% events.map((event)=>{%>
 
-                                        <!-- <div class="ml-auto"><span class="text-success">Open</span></div> -->
+                            <div class="col-lg-4">
+                                <div class="container">
+                                    <div class="card px-4 pt-4 pb-4 mx-auto mt-5">
+                                        <div class="row">
+                                            <h5 class="align-self-center ml-2"><%-event.eventName%></h5>
+
+                                            <!-- <div class="ml-auto"><span class="text-success">Open</span></div> -->
+                                        </div>
+                                        <img class="border border-success" style="height: 10rem;" src="<%-event.eventPassImage%>">
+
+                                        <p class="mt-3 mb-2 text-center font-weight-bold">From: <%-event.eventStartDate%> To: <%-event.eventEndDate%></p>
+                                        <p class="text-center">Organised by <%-event.eventOrganizer%></p>
+
+                                        <p class="mb-0 btn btn-outline-info">Ticket Price: <%-event.eventTicketPrice%> USD</p>
+                                        <p class="mb-0 btn btn-outline-info">Burn Value: <%-event.eventTicketBurnValue%> USD</p>
+
+                                        <div class="d-flex p-2 justify-content-between" >
+                                        <span class="btn btn-outline-success">Minted:<%-event.minted%></span>
+                                        <span class="btn btn-outline-danger">Left:<%-event.stock-event.minted%></span>
+                                        <span class="btn btn-outline-primary">Total:<%-event.stock%></span>
+                                        </div>
+                                        <button class="btn btn-dark mb-2"><span>CheckIn</span></button>
+                                        <button class="btn info"><span>Delete</span></button>
+                                        <button class="btn info"><span>Edit</span></button>
+
                                     </div>
-                                    <img class="border border-success" src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80">
-
-                                    <p class="mt-3 mb-2 text-center font-weight-bold">From: 10/06/20 To: 10/06/20</p>
-                                    <p class="text-center">Organised by hello</p>
-
-                                    <p class="mb-0 btn btn-outline-info">Ticket Price: 3000 USD</p>
-                                    <p class="mb-0 btn btn-outline-info">Burn Value: 30 USD</p>
-
-                                    <div class="d-flex p-2 justify-content-between" >
-                                    <span class="btn btn-outline-success">Minted:50</span>
-                                    <span class="btn btn-outline-danger">Left:50</span>
-                                    <span class="btn btn-outline-primary">Total:100</span>
-                                    </div>
-                                    <button class="btn btn-dark mb-2"><span>CheckIn</span></button>
-                                    <button class="btn info"><span>Delete</span></button>
-                                    <button class="btn info"><span>Edit</span></button>
-
                                 </div>
+
                             </div>
 
-                        </div>
+                        <% }) %>
+    
                     </div>
                     
 

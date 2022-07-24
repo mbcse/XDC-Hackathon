@@ -35,7 +35,7 @@ export const deleteEvent = async (req, res) => {
 export const createEvent = async (req, res) => {
   const {
     eventName, eventOrganizer, eventTicketPrice,
-    eventTicketBurnValue, eventStartDate, eventEndDate
+    eventTicketBurnValue, eventStartDate, eventEndDate, stock
   } = req.body
   logger.debug(req.body)
   const ipfsFileLink = await ipfsImageUploader('eventpass' + eventName, req.file.path)
@@ -46,6 +46,7 @@ export const createEvent = async (req, res) => {
     const user = await User.findById(req.session.userId)
     const newEvent = await new Event({
       createdBy: user._id,
+      stock,
       eventName,
       eventOrganizer,
       eventTicketPrice,

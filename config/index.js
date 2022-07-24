@@ -5,6 +5,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import dbConstants from './dbConstants.json'
 import contract from './contract.json'
+import queue from './queue.json'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -48,7 +49,8 @@ export default {
   API_KEY: process.env.API_KEY,
 
   QUEUE: {
-    CONNECTION_URL: process.env.RMQ_CONN_URL
+    CONNECTION_URL: process.env.RMQ_CONN_URL,
+    LIST: queue
   },
 
   DB_CONSTANTS: dbConstants,
@@ -75,7 +77,7 @@ export default {
   SESSION_SECRET: 'eventonchain-secert7675283',
 
   PINATA: {
-    URL: 'https://gateway.pinata.cloud/ipfs/',
+    URL: 'https://eventonchain.infura-ipfs.io/ipfs/' || 'https://gateway.pinata.cloud/ipfs/',
     API_KEY: '62339bbfefbce43751af',
     API_SECRET: '292825ec11d2988b8524adb1b3c739ad60bbff5382ea1114c8fb14eb4f3e4c06'
   },
