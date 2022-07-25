@@ -14,7 +14,8 @@ import config from './config'
 import logger from './utilities/logger.js'
 import routes from './routes'
 import rateLimiter from './middleware/rateLimiter.js'
-
+import { consumeQueue } from './utilities/queueUtils'
+import { consumeMintTicketByCryptoQueue } from './controllers/user'
 import './database'
 
 const app = express()
@@ -51,6 +52,12 @@ app.use(helmet({
     }
   }
 })) */
+
+try {
+  consumeQueue(config.QUEUE.LIST.mint, consumeMintTicketByCryptoQueue)
+} catch (err) {
+  console.log(err)
+}
 
 app.use(express.static(path.join(__dirname, '/public')))
 app.use('/', routes)

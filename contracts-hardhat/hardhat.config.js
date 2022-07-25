@@ -82,6 +82,16 @@ module.exports = {
       accounts: getPrivateKeys(),
       timeout: 50000
     },
+    bttc_testnet: {
+      url: config.NETWORKS.BTTC_TESTNET.RPC_URL || '',
+      accounts: getPrivateKeys(),
+      timeout: 50000
+    },
+    xdc_testnet: {
+      url: config.NETWORKS.XDC_TESTNET.RPC_URL || '',
+      accounts: getPrivateKeys(),
+      timeout: 50000
+    },
 
     custom: {
       url: config.NETWORKS.CUSTOM.RPC_URL || '',

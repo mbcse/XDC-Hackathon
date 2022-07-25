@@ -1,25 +1,25 @@
 import database from '../../database'
-// import { web3 } from '../web3Utils'
-// import { queueConnected } from '../queueUtils'
+import { web3 } from '../web3Utils'
+import { queueConnected } from '../queueUtils'
 
 function checkDatabaseConnection () {
   return database.readyState === 1
 }
 
-// function checkQueueConnection () {
-//   return queueConnected
-// }
+function checkQueueConnection () {
+  return queueConnected
+}
 
-// async function checkWeb3Connection () {
-//   try {
-//     const block = await web3.eth.getBlockNumber()
-//     if (block) return true
-//     return false
-//   } catch (err) {
-//     console.log(err)
-//     return false
-//   }
-// }
+async function checkWeb3Connection () {
+  try {
+    const block = await web3.eth.getBlockNumber()
+    if (block) return true
+    return false
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+}
 
 export async function healthCheck () {
   const healthCheckResponse = {
@@ -39,15 +39,15 @@ export async function healthCheck () {
     healthCheckResponse.services.DATABASE = 'NOT OK'
   }
 
-  // if (!await checkWeb3Connection()) {
-  //   healthCheckResponse.message = 'NOT OK'
-  //   healthCheckResponse.services.WEB3 = 'NOT OK'
-  // }
+  if (!await checkWeb3Connection()) {
+    healthCheckResponse.message = 'NOT OK'
+    healthCheckResponse.services.WEB3 = 'NOT OK'
+  }
 
-  // if (!checkQueueConnection()) {
-  //   healthCheckResponse.message = 'NOT OK'
-  //   healthCheckResponse.services.QUEUE = 'NOT OK'
-  // }
+  if (!checkQueueConnection()) {
+    healthCheckResponse.message = 'NOT OK'
+    healthCheckResponse.services.QUEUE = 'NOT OK'
+  }
 
   return healthCheckResponse
 }

@@ -223,10 +223,37 @@ contract EVENT_ON_CHAIN_NFT is
     }
 
     // As part of the lazy minting this mint function will be called by the admin and will transfer the NFT to the buyer
-    function mintTicket(string memory receiverName, address receiver,uint passId, string memory IPFSHash, uint ticketPrice, uint ticketBurnValue) public {
+    function mintTicketByCrypto(string memory receiverName, address receiver,uint passId, string memory IPFSHash, uint ticketPrice, uint ticketBurnValue, uint payId) public onlyAdmin {
+        require(ticketPayment[receiver][payId]>=ticketPrice,"Ticket Payment not done or payed less");
         _setEventPassDetails(passId, receiverName, receiver, ticketPrice, ticketBurnValue);
         _mint(receiver, passId);
         _setTokenURI(passId, IPFSHash);
+        _clearPayment(receiver, payId);
+
+    }
+
+    // As part of the lazy minting this mint function will be called by the admin and will transfer the NFT to the buyer
+    function mintTicketByFiat(string memory receiverName, address receiver,uint passId, string memory IPFSHash, uint ticketPrice, uint ticketBurnValue) public onlyAdmin {
+        _setEventPassDetails(passId, receiverName, receiver, ticketPrice, ticketBurnValue);
+        _mint(receiver, passId);
+        _setTokenURI(passId, IPFSHash);
+    }
+
+    mapping(address => mapping(uint => uint)) public ticketPayment;
+
+    function _clearPayment(address payer, uint payId) internal{
+        delete ticketPayment[payer][payId];
+    }
+
+    function refundPayment(address payer, uint payId, uint amount) public onlyAdmin{
+        require(ticketPayment[payer][payId]>=amount,"Refund Amount is more than users pay balance");
+        ticketPayment[payer][payId]-=amount;
+        payable(payer).transfer(amount);
+    }
+
+    function payForTicket(uint payId, uint amount) public payable {
+        require(msg.value>=amount,"Msg.value amount is less then passed amount");
+        ticketPayment[msg.sender][payId] += amount;
     }
     
     /**

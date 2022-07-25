@@ -53,7 +53,20 @@ const userSchema = new Schema({
 
   accountsConnected: [{
     type: String
-  }]
+  }],
+
+  transactions: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'transactions'
+  }],
+
+  payments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'payments'
+    }
+  ]
+
 }, {
   timestamps: {
     createdAt: 'created_at',

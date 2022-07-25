@@ -52,7 +52,11 @@ const eventSchema = new Schema({
     type: String,
     trim: true,
     required: true
-  }
+  },
+  ticketsMinted: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'tickets'
+  }]
 }, {
   timestamps: {
     createdAt: 'created_at',

@@ -87,6 +87,10 @@ export default {
       ADDRESS: contract.NFT_ADDRESS,
       ABI: contract.NFT_ABI
     }
+  },
+
+  API_KEYS: {
+    CRYPTO_COMPARE: '7cc0e3a7a8b49ec1b60f1ef51774b15cb6a317c79f1fa9063082e40289b45c8a'
   }
 
 }

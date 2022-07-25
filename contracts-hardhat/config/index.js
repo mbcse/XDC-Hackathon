@@ -41,6 +41,14 @@ module.exports = {
     CUSTOM: {
       RPC_URL: process.env.CUSTOM_RPC_URL,
       CHAIN_ID: process.env.CUSTOM_CHAIN_ID
+    },
+    BTTC_TESTNET: {
+      RPC_URL: 'https://api.shasta.trongrid.io/jsonrpc',
+      CHAIN_ID: 1028
+    },
+    XDC_TESTNET: {
+      RPC_URL: 'https://rpc.apothem.network',
+      CHAIN_ID: 51
     }
 
   },

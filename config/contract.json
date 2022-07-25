@@ -623,9 +623,52 @@
                     "internalType": "uint256",
                     "name": "ticketBurnValue",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "payId",
+                    "type": "uint256"
                 }
             ],
-            "name": "mintTicket",
+            "name": "mintTicketByCrypto",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "receiverName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "address",
+                    "name": "receiver",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "passId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "IPFSHash",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "ticketPrice",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "ticketBurnValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "mintTicketByFiat",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -712,6 +755,47 @@
                 }
             ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "payId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "payForTicket",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "payer",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "payId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "refundPayment",
+            "outputs": [],
+            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -892,6 +976,30 @@
         {
             "inputs": [
                 {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ticketPayment",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
                     "internalType": "uint256",
                     "name": "index",
                     "type": "uint256"
@@ -1008,5 +1116,5 @@
             "type": "function"
         }
     ],
-    "NFT_ADDRESS": "0x853E26a160C389f8753de9b6f56fB949dc2fb066"
+    "NFT_ADDRESS": "0x4e478e14Ec6046fc7051216546208B9EFe0f9dAF"
 }

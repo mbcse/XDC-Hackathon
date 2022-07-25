@@ -5,7 +5,7 @@
     "size": "npx hardhat size-contracts",
     "coverage": "npx hardhat coverage",
     "compile": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy_proxy.js --network polygon_testnet"
+    "deploy": "npx hardhat run scripts/deploy_proxy.js --network xdc_testnet"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",

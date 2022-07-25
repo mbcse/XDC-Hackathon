@@ -16,7 +16,7 @@ const { Transaction: Tx } = pkg
 //   'petersburg'
 // )
 
-const customChainParams = { name: 'matic-mumbai', chainId: 80001, networkId: 80001 }
+const customChainParams = { name: 'XinFin Apothem Testnet', chainId: 51, networkId: 51 }
 
 export const createTx = async (txObject) => {
   const ADMIN_WALLET = await getAdminWallet()

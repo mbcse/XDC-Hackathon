@@ -3,17 +3,25 @@ import config from '../config'
 
 const Schema = mongoose.Schema
 
-const ticketSchema = new Schema({
-  issuedTo: {
+const paymentSchema = new Schema({
+  payId: {
+    type: Number,
+    required: true
+  },
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
     required: true
   },
-  issuedToAddress: {
+  address: {
+    type: String
+  },
+  type: {
     type: String,
+    enum: ['CRYPTO', 'FIAT'],
     required: true
   },
-  passId: {
+  amount: {
     type: Number,
     required: true
   },
@@ -21,10 +29,6 @@ const ticketSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'events',
     required: true
-  },
-  minted: {
-    type: Boolean,
-    default: false
   }
 }, {
   timestamps: {
@@ -33,5 +37,5 @@ const ticketSchema = new Schema({
   }
 })
 
-const Tickets = mongoose.model('tickets', ticketSchema)
-export default Tickets
+const Payments = mongoose.model('payments', paymentSchema)
+export default Payments
