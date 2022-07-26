@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <%- include('../includes/dashboard/headFiles')%>
 
     <link rel="stylesheet" href="/dashboard/css/custom.css">
@@ -37,7 +38,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">All Participants of <%-eventName%></h1>
+                        <h1 class="h3 mb-0 text-gray-800">My Transactions</h1>
                       
                     </div>
 
@@ -47,21 +48,27 @@
                         <div class="col-lg-12">
                     <div class="card shadow mb-4 ev-table">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">All Tickets Minted for Event <%-eventName%> </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Transactions </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            
                                             <th>Sno</th>
+                                            <th>TransactionId</th>
+                                            <th>TransactionHash</th>
                                             <th>TicketId</th>
-                                            <th>NFT Pass Id</th>
-                                            <th>Participant Name</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
+                                            <th>TimeStamp</th>
+                                            <th>Account Address</th>
+                                            <th>Event Name</th>
+                                            <th>Payment Type</th>
+                                            <th>Transaction Type</th>
                                             <th>status</th>
-                                            <th>Action</th>
+                                            <th>Reason</th> 
+
+
                                          
                                       
                                         </tr>
@@ -69,38 +76,38 @@
                                     <tfoot>
                                         <tr>
                                             <th>Sno</th>
+                                            <th>TransactionId</th>
+                                            <th>TransactionHash</th>
                                             <th>TicketId</th>
-                                            <th>NFT Pass Id</th>
-                                            <th>Participant Name</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
+                                            <th>TimeStamp</th>
+                                            <th>Account Address</th>
+                                            <th>Event Name</th>
+                                            <th>Payment Type</th>
+                                            <th>Transaction Type</th>
                                             <th>status</th>
-                                            <th>Action</th>                                      
+                                            <th>Reason</th>                                  
                                       
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% tickets.map((ticket, i)=>{%>
-                                            <tr>
-                                                <td><%-i+1%></td>
-                                                <td><%-ticket._id%></td>
-                                                <td><%-ticket.passId%></td>
-                                                <td><%-ticket.issuedTo.name%></td>
-                                                <td><%-ticket.issuedTo.email%></td>
-                                                <td><%-ticket.issuedToAddress%></td>
-                                                <td id="ticket-status-<%-ticket._id%>"><%-ticket.status%></td>
-                                                <td class="action-link">
-                                                    <% if (ticket.status !="CHECKEDIN"){ %> 
-                                                    <a href="#" id="checkin-ticket-button-<%-ticket._id%>" class="checkin-ticket-button" value="<%-ticket._id%>"><i class="fa fa-check"></i> CheckIn</a>
-                                                    <% }else if(ticket.status =="CHECKEDIN"){ %> 
-                                                    <a href="#" id="issue-poap-button-<%-ticket._id%>" class="issue-poap-button" value="<%-ticket._id%>" class="text-success pl-2"><i class="fa fa-award"></i>Issue Poap</a>
-                                                    <%}%>
-                                                </td>
-                                             </tr>
-    
-                                         <%})%>
+                                        <% transactions.map((transaction, i)=>{%>
+                                        <tr>
+                                            <td><%-i+1%></td>
+                                            <td><%-transaction._id%></td>
+                                            <td><a href="https://explorer.apothem.network/txs/<%-transaction.txHash%>"><%- transaction.txHash && transaction.txHash.toString().substring(0,10)%></a></td>
+                                            <td><%-transaction.ticketId%></td>
+                                            <td><%-transaction.created_at%></td>
+                                            <td><%- transaction.address.toString().substring(0,5)%>...<%- transaction.address.toString().substring(transaction.address.toString().length-6)%></td>
+                                            <td><%-transaction.eventId.eventName%></td>
+                                            <td><%-transaction.paymentType%></td>
+                                            <td><%-transaction.type%></td>
+                                            <td><%-transaction.status%></td>
+                                            <td><%-transaction.reason%></td>
+                                        </tr>
 
-
+                                        <%})%>
+                                       
+                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -129,7 +136,6 @@
     <!-- Page level plugins -->
     <!-- Page level custom scripts -->
     <script src="/dashboard/js/demo/datatables-demo.js"></script>
-    <script src="/dashboard/app/checkIn.js"></script>
 
 </body>
 

@@ -9,7 +9,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
 
     <%- include('../includes/dashboard/headFiles')%>
 
@@ -64,7 +63,7 @@
                                         <span class="btn btn-outline-danger">Left:<%-event.stock-event.minted%></span>
                                         <span class="btn btn-outline-primary">Total:<%-event.stock%></span>
                                         </div>
-                                        <button class="btn btn-dark mb-2"><span>CheckIn</span></button>
+                                        <a class="btn btn-dark mb-2" href="/user/dashboard/checkin/<%-event._id%>"><span>CheckIn</span></a>
                                         <button class="btn info"><span>Delete</span></button>
                                         <button class="btn info"><span>Edit</span></button>
 

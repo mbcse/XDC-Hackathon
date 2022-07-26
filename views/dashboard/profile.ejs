@@ -9,7 +9,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
 
     <%- include('../includes/dashboard/headFiles')%>
 
@@ -52,17 +51,17 @@
                               <form class="user">
                             <div class="form-group row">
                                 <div class="col-sm-12 mb-3 ">
-                                    <input type="text" class="form-control form-control-user" id="" Value="Douglas McGee">
+                                    <input type="text" class="form-control form-control-user" id="name-update" Value="" placeholder="Your New Name">
                                 </div>
-                                <div class="col-sm-12">
+                                <!-- <div class="col-sm-12">
                                     <input type="email" class="form-control form-control-user" id="" Value="admin@yahoo.in">
-                                </div>
+                                </div> -->
                             </div>
                            
                             
-                            <a href="login.html" class="btn btn-primary btn-user">
+                            <button type="button" id="update-name-button" class="btn btn-primary btn-user">
                                Update
-                            </a>
+                            </button>
                        
                         </form>
                         </div>
@@ -89,6 +88,7 @@
     <!-- Page level plugins -->
     <!-- Page level custom scripts -->
     <script src="/dashboard/js/demo/datatables-demo.js"></script>
+    <script src="/dashboard/app/updateName.js"></script>
 
 </body>
 

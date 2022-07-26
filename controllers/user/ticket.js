@@ -15,6 +15,7 @@ import CurrentPassId from '../../database/currentPassId.js'
 import { v4 as uuid } from 'uuid'
 import { generateOTP as getNewPayId } from '../../utilities/otpUtils'
 import fetch from 'node-fetch'
+import Ticket from '../../database/tickets.js'
 
 // export const ticketMintByFiat = async (req, res) => {
 //   const eventId = req.body.eventId
@@ -94,7 +95,7 @@ export const ticketMintByCrypto = async (req, res) => {
 
     const metadataUri = (await saveJSONToIPFS(metadata)).IpfsHash
     const passId = await generateNewPassId()
-
+    console.log(passId)
     const txId = uuid()
     const tx = new Transaction({ _id: txId, type: 'MINT', userId: req.session.userId, paymentType: 'CRYPTO', eventId, address: req.session.address, passId, payId: paymentData.payId })
     await tx.save()
@@ -107,7 +108,8 @@ export const ticketMintByCrypto = async (req, res) => {
       IPFSHash: metadataUri,
       ticketPrice: eventData.eventTicketPrice,
       ticketBurnValue: eventData.eventTicketBurnValue,
-      txId
+      txId,
+      payId: paymentData.payId
     })
     responseUtils.response.successResponse(res, 'Minting Transaction Send TxId: ' + txId)
   } catch (err) {
@@ -118,17 +120,13 @@ export const ticketMintByCrypto = async (req, res) => {
 const generateNewPassId = async () => {
   let currentPassId = await CurrentPassId.findById(1)
   if (!currentPassId) {
-    currentPassId = new CurrentPassId({ _id: 1, passId: 1 })
+    currentPassId = await new CurrentPassId({ _id: 1, passId: 1 }).save()
     return 1
   } else {
     currentPassId.passId += 1
     await currentPassId.save()
     return currentPassId.passId
   }
-}
-
-export const consumeMintTicketByCryptoQueue = async (data) => {
-  await mintTicketByCrypto(data.receiverName, data.receiver, data.passId, data.IPFSHash, data.ticketPrice, data.ticketBurnValue, data.txId, data.payId)
 }
 
 export const getNewPaymentSession = async (req, res) => {
@@ -159,4 +157,21 @@ export const getNewPaymentSession = async (req, res) => {
     logger.error(err)
     responseUtils.response.serverErrorResponse(res, err)
   }
+}
+
+export const checkInTicket = async (req, res) => {
+  const ticketId = req.params.ticketId
+  try {
+    const ticketData = await Ticket.findById(ticketId)
+    ticketData.status = 'CHECKEDIN'
+    await ticketData.save()
+    responseUtils.response.successResponse(res, 'CheckIn Successfull', { result: true })
+  } catch (err) {
+    logger.error(err)
+    responseUtils.response.serverErrorResponse(res, err)
+  }
+}
+
+export const consumeMintTicketByCryptoQueue = async (data) => {
+  await mintTicketByCrypto(data.receiverName, data.receiver, data.passId, data.IPFSHash, data.ticketPrice, data.ticketBurnValue, data.txId, data.payId)
 }

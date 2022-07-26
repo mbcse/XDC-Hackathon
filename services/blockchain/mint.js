@@ -9,27 +9,22 @@ import Event from '../../database/events.js'
 export const mintTicketByCrypto = async (receiverName, receiver, passId, IPFSHash, ticketPrice, ticketBurnValue, txId, payId) => {
   // const creatorAddress = (await getAdminWallet()).address;
   const eventOnChainContract = new web3.eth.Contract(config.CONTRACTS.NFT.ABI, config.CONTRACTS.NFT.ADDRESS)
-  console.log(eventOnChainContract)
   const txObject = {}
-  console.log('hello')
   txObject.data = eventOnChainContract.methods
     .mintTicketByCrypto(
       receiverName,
       receiver,
       passId,
       IPFSHash,
-      ticketPrice,
-      ticketBurnValue,
+      web3.utils.toWei(ticketPrice, 'ether'),
+      web3.utils.toWei(ticketBurnValue, 'ether'),
       payId
     )
     .encodeABI()
-  console.log('hello')
 
-  txObject.gasLimit = web3.utils.toHex(250000)
-  console.log('hello')
+  txObject.gasLimit = web3.utils.toHex(700000)
 
   txObject.to = eventOnChainContract.options.address
-  console.log('hello')
 
   txObject.value = '0x'
 

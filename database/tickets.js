@@ -22,9 +22,10 @@ const ticketSchema = new Schema({
     ref: 'events',
     required: true
   },
-  minted: {
-    type: Boolean,
-    default: false
+  status: {
+    type: String,
+    enum: ['NONE', 'MINTED', 'CHECKEDIN', 'BANNED', 'CANCELLED'],
+    default: 'NONE'
   }
 }, {
   timestamps: {

@@ -137,3 +137,13 @@ export const login = async (req, res) => {
     responseUtils.response.serverErrorResponse(res, err)
   }
 }
+
+export const logout = async (req, res) => {
+  try {
+    req.session.destroy()
+    res.redirect('/')
+  } catch (err) {
+    logger.error(err)
+    responseUtils.response.serverErrorResponse(res, err)
+  }
+}

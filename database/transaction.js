@@ -77,7 +77,7 @@ transactionSchema.methods.setFailed = async function () {
 transactionSchema.methods.setSuccess = async function () {
   try {
     this.status = 'SUCCESS'
-    const ticket = await new Ticket({ issuedTo: this.userId, issuedToAddress: this.address, passId: this.passId, eventId: this.eventId, minted: true }).save()
+    const ticket = await new Ticket({ issuedTo: this.userId, issuedToAddress: this.address, passId: this.passId, eventId: this.eventId, status: 'MINTED' }).save()
     this.ticketId = ticket._id
     await this.save()
     const user = await User.findById(this.userId)
@@ -104,5 +104,5 @@ transactionSchema.methods.setProcessing = async function () {
   }
 }
 
-const Transaction = mongoose.model('transaction', transactionSchema)
+const Transaction = mongoose.model('transactions', transactionSchema)
 export default Transaction

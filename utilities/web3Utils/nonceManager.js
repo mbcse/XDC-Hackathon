@@ -12,7 +12,7 @@ export const init = async (wallet) => {
   NONCE[wallet] = await web3.eth.getTransactionCount(wallet, 'pending')
   setInterval(async () => {
     NONCE[wallet] = await web3.eth.getTransactionCount(wallet, 'pending')
-    logger.debug('Current Admin Nounce: ' + NONCE[wallet])
+    // logger.debug('Current Admin Nounce: ' + NONCE[wallet])
   }, 60000)
 }
 

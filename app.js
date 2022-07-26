@@ -8,6 +8,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import session from 'express-session'
+import MongoStore from 'connect-mongo'
 
 import config from './config'
 
@@ -38,7 +39,11 @@ app.use(session({
   secret: config.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  store: new MemoryStore(),
+  store: MongoStore.create({
+    mongoUrl: config.DATABASE.MONGO.URI,
+    ttl: 14 * 24 * 60 * 60,
+    autoRemove: 'native'
+  }),
   cookie: { secure: false }
 }))
 app.use(compression())

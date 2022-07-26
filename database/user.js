@@ -5,6 +5,11 @@ import config from '../config'
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+  name: {
+    type: String,
+    trim: true
+  },
+
   email: {
     type: String,
     trim: true,
@@ -56,7 +61,7 @@ const userSchema = new Schema({
   }],
 
   transactions: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'transactions'
   }],
 
